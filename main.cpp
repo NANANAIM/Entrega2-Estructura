@@ -28,22 +28,22 @@ int Main() {
         return 0;
     }
     
-    // Tu switch original aquí
+
     switch (elegir) {
         case 1:
-            // ... tu código para insertar
+            // ... añadir codigo
             break;
         case 2:
-            // ... tu código para eliminar
+            // ... añadir codigo
             break;
         case 3:
-            // ... tu código para eliminar
+            // ... añadir codigo
             break;
        case 4:
-            // ... tu código para eliminar
+            // ... añadir codigo
             break;
        case 5:
-            // ... tu código para eliminar
+            // ... añadir codigo
             break;
         case 6:
             std::cout << "Saliendo..." << std::endl;
@@ -52,3 +52,4 @@ int Main() {
     
     return elegir;
 }
+
