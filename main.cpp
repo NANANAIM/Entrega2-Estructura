@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-int Main() {
+int main() {
     std::string entrada;
     int elegir;
     
@@ -52,4 +52,5 @@ int Main() {
     
     return elegir;
 }
+
 
