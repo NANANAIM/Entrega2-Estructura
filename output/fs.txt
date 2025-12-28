@@ -1,0 +1,12 @@
+F /HOLA 2
+HOLAAA
+holap
+F /hola2 0
+D /subcarpeta1
+D /subcarpeta1/carpeta1
+F /subcarpeta1/carpeta1/archivocarpeta1 1
+texto de archivo carpeta 1
+D /subcarpeta1/carpeta1/sub
+F /subcarpeta1/carpeta1/sub/abs 1
+ABSSSSS
+F /archivo.txt 0
