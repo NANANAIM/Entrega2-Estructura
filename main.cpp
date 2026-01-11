@@ -8,7 +8,7 @@ using namespace std;
 
 static void imprimir_prompt(Nodo* cwd) {
 	char* p = construir_ruta_absoluta(cwd);
-	cout << p << " $ ";
+	cout << p << " $ " << flush;  // Añadido flush para forzar salida inmediata
 	delete[] p;
 }
 
@@ -54,6 +54,9 @@ static Nodo* resolver_padre_para_nuevo(Nodo* raiz, Nodo* cwd, const char* ruta, 
 }
 
 int main() {
+	// Desactivar el buffering de cout para que todo se muestre inmediatamente
+	cout << unitbuf;
+	
 	// Crear directorio raíz '/'
 	Nodo* raiz = crear_nodo(NODO_DIR, "", nullptr);
 	Nodo* cwd = raiz;
@@ -64,25 +67,29 @@ int main() {
 	{
 		ifstream ifs(rutaPorDefecto, ios::in);
 		if (ifs.is_open()) {
-			deserializar_arbol(raiz, ifs, cout);
+			// Redirigir errores a cerr para no interferir con cout
+			deserializar_arbol(raiz, ifs, cerr);
 			ifs.close();
 			archivoAbierto = str_duplicar(rutaPorDefecto);
-			// carga silenciosa
 		}
 	}
 
 	// Preparar entrada
 	cin.clear();
-	cin.peek();
+	
+	// Mostrar el primer prompt inmediatamente
+	imprimir_prompt(cwd);
 
 	char cmdline[1024];
 	while (true) {
-		imprimir_prompt(cwd);
 		if (!cin.getline(cmdline, 1024)) break;
 		// recortar CR
 		int len = str_longitud(cmdline); if (len > 0 && cmdline[len-1] == '\r') cmdline[len-1] = '\0';
 		// saltar vacío
-		if (cmdline[0] == '\0') continue;
+		if (cmdline[0] == '\0') {
+			imprimir_prompt(cwd);
+			continue;
+		}
 		// parsear comando y argumentos
 		char cmd[32]; int ci = 0; int i = 0;
 		while (cmdline[i] == ' ') ++i;
@@ -199,6 +206,9 @@ int main() {
 		} else {
 			cout << "Comando desconocido: " << cmd << "\n";
 		}
+		
+		// Mostrar el prompt para el siguiente comando
+		imprimir_prompt(cwd);
 	}
 
 	if (archivoAbierto) { delete[] archivoAbierto; }
