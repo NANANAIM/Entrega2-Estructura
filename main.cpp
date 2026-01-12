@@ -204,7 +204,7 @@ int main() {
 				cout << "Abierto: " << arg1 << "\n";
 			}
 		} else {
-			cout << "Comando desconocido: " << cmd << "\n";
+			cout << "Comando desconocido: " << cmd << "\n"; //Muestrado mensaje para comandos no encontrados 
 		}
 		
 		// Mostrar el prompt para el siguiente comando
